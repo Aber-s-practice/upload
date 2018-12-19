@@ -10,7 +10,7 @@ app = Sanic()
 
 
 def push(filename: str) -> None:
-    Popen(f'git add {filename} && git commit -m "Auto commit" && git push', cwd=Media_DIR, shell=True)
+    Popen(f'git add {filename} && git commit -m "Auto commit" && git push && rm -f {filename}', cwd=Media_DIR, shell=True)
 
 
 @app.listener('before_server_start')
