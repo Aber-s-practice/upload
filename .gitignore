@@ -1,0 +1,7 @@
+.idea/
+.vscode/
+*.py[cod]
+
+*.sock
+*.log
+*.pid

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMAGE</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+    <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/clipboard@2.0.0/dist/clipboard.min.js"></script>
+</head>
+<style>
+    main {
+        max-width: 900px;
+        height: 70vh;
+        padding: 30px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    form {
+        position: relative;
+        display: block;
+        box-sizing: border-box;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px #000 solid;
+        background: radial-gradient(circle, rgb(217, 239, 246), lightblue);
+    }
+    input[type="file"] {
+        position: absolute;
+        display: block;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        cursor: pointer;
+        opacity: 0;
+    }
+    #help {
+        font-size: calc(14px + 0.1vw);
+        padding: 30px;
+        border: 2px #000 dashed;
+    }
+    main .pure-form {
+        display: flex;
+        justify-content: flex-start;
+    }
+    #result {
+        border: none; 
+        outline: none; 
+        flex-grow: 1;
+        height: 100%;
+        margin: 0;
+    }
+    #copy {
+        float: right;
+    }
+</style>
+
+<body>
+    <main>
+        <form id="form">
+            <input type="file" accept="image/*" name="image" onchange="upload(event)">
+            <div id="help">
+                上传图片
+            </div>
+        </form>
+        <div class="pure-form">
+            <input class="" id="result" type="text" readonly>
+            <button id="copy" class="pure-button pure-button-primary" data-clipboard-target="#result">复制</button>
+        </div>
+    </main>
+    <script>
+        function upload(event) {
+            if (event.target.value) {
+                axios({
+                    method: 'post',
+                    url: '/image',
+                    data: new FormData(document.getElementById("form")),
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(function (response) {
+                    var message = response.data;
+                    switch (message["code"]) {
+                        case 200:
+                            var result = document.getElementById("result");
+                            result.setAttribute("value", message["url"]);
+                            var button = document.getElementById("copy");
+                            var clipboard = new ClipboardJS(button);
+                            break;
+                        case 701:
+                            alert(message["message"])
+                            break;
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                    alert("服务器出了点问题!");
+                }).then(function () {
+                    var file = document.getElementsByTagName("input")[0];
+                    file.outerHTML = file.outerHTML;
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
