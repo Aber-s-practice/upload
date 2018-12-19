@@ -4,7 +4,7 @@ from os import path
 from subprocess import Popen
 from sanic import Sanic, response
 from sanic.views import HTTPMethodView
-from .config import Media_DIR, BASE_DIR, Media_URL
+from .config import Media_DIR, BASE_DIR, Media_URL, Media_Rep
 
 app = Sanic()
 
@@ -16,7 +16,7 @@ def push(filename: str) -> None:
 @app.listener('before_server_start')
 def try_pull(app, loop):
     if not path.exists(Media_DIR):
-        Popen('git pull https://git.dev.tencent.com/AberSheeran/image.git', cwd=path.dirname(Media_DIR), shell=True)
+        Popen(f'git clone {Media_Rep}', cwd=path.dirname(Media_DIR), shell=True)
 
 
 class IndexView(HTTPMethodView):

@@ -57,9 +57,16 @@
         flex-grow: 1;
         height: 100%;
         margin: 0;
+        border-radius: 0;
     }
     #copy {
         float: right;
+        border-radius: 0;
+    }
+    footer {
+        text-align: center;
+        padding: 20px;
+        font-size: calc(14px + 0.1vw);
     }
 </style>
 
@@ -76,6 +83,9 @@
             <button id="copy" class="pure-button pure-button-primary" data-clipboard-target="#result">复制</button>
         </div>
     </main>
+    <footer>
+        上传图片成功之后获取的链接，需要经过很短的一段反应时间后才能访问(一般需要等待十几秒，不会超过一分钟)<br>
+    </footer>
     <script>
         function upload(event) {
             if (event.target.value) {
