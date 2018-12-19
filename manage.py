@@ -101,7 +101,6 @@ if __name__ == '__main__':
                     @app.listener('after_server_stop')
                     def clear_unix(app, loop):
                         os.unlink(unix_socket_path)
-                        sys.exit(0)
 
                     app.run(sock=unix_socket)
             elif args.method == "stop":
