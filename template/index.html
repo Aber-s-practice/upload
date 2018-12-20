@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="无需登录,提供免费的HTTPS/HTTP图床服务">
+    <meta name="keywords" content="图床, 免费图床, HTTPS图床, HTTP图床">
     <title>IMAGE</title>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
     <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
@@ -89,12 +91,21 @@
     }
 </style>
 <style>
-    main {
+    header, #main, #about {
         max-width: 900px;
-        height: 70vh;
-        padding: 30px;
         margin: 0 auto;
+    }
+    header {
+        padding: 10px 30px;
+    }
+    #main {
+        height: 70vh;
+        padding: 10px;
         box-sizing: border-box;
+    }
+    #about {
+        padding: 30px;
+        line-height: 2;
     }
     form {
         position: relative;
@@ -107,7 +118,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: radial-gradient(circle, rgb(217, 239, 246), lightblue);
+        /* background: radial-gradient(circle, rgb(217, 239, 246), lightblue); */
+        background: #f0c9cf;
     }
     input[type="file"] {
         position: absolute;
@@ -125,7 +137,7 @@
         padding: 30px;
         border: 2px #000 dashed;
     }
-    main .pure-form {
+    #main .pure-form {
         display: flex;
         justify-content: flex-start;
     }
@@ -140,6 +152,7 @@
     #copy {
         float: right;
         border-radius: 0;
+        background: #f1939c;
     }
     footer {
         text-align: center;
@@ -158,7 +171,29 @@
             <div class="num">0%</div>
         </div>
     </div>
-    <main>
+    <header>
+        <div class="pure-menu pure-menu-horizontal">
+            <a href="#" class="pure-menu-heading pure-menu-link">首页</a>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item">
+                    <a href="#about" class="pure-menu-link">关于本站</a>
+                </li>
+                <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                    <a href="#" class="pure-menu-link">联系我</a>
+                    <ul class="pure-menu-children">
+                        <li class="pure-menu-item"><a href="mailto:AberSheeran@qq.com" class="pure-menu-link">Email</a></li>
+                        <li class="pure-menu-item"><a href="https://twitter.com/Mr_Time__" class="pure-menu-link">Twitter</a></li>
+                        <li class="pure-menu-item"><a href="https://github.com/AberSheeran" class="pure-menu-link">Github</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div id="about" class="route" hidden>
+        本站使用完全免费，承诺只要 abersheeran.com 这个一级域名还在我手上，图床就不会失效。<br>
+        上传图片成功之后获取的链接，需要经过很短的一段反应时间后才能访问。<br>
+    </div>
+    <div id="main" class="route" hidden>
         <form id="form">
             <input type="file" accept="image/*" name="image" onchange="upload(event)">
             <div id="help">
@@ -169,10 +204,7 @@
             <input class="" id="result" type="text" readonly>
             <button id="copy" class="pure-button pure-button-primary" data-clipboard-target="#result">复制</button>
         </div>
-    </main>
-    <footer>
-        上传图片成功之后获取的链接，需要经过很短的一段反应时间后才能访问(一般需要等待十几秒，不会超过一分钟)<br>
-    </footer>
+    </div>
     <script>
         function upload(event) {
             if (event.target.value) {
@@ -236,6 +268,26 @@
             left.style.transform = 'rotate(' + 3.6 * rotate + 'deg)';
             num.innerHTML = `${rotate}%`
         }
+    </script>
+    <script>
+        window.addEventListener('hashchange', function () {
+            changeroute();
+        });
+        function changeroute() {
+            var routes = document.querySelectorAll(".route");
+            for (var i = 0; i < routes.length; i++) {
+                routes[i].hidden = true;
+            }
+            switch (window.location.hash) {
+                case "#about":
+                    document.getElementById("about").hidden = false;
+                    break;
+                default:
+                    document.getElementById("main").hidden = false;
+                    break;
+            }
+        }
+        changeroute();
     </script>
 </body>
 
