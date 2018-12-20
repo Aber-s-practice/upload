@@ -10,6 +10,85 @@
     <script src="https://unpkg.com/clipboard@2.0.0/dist/clipboard.min.js"></script>
 </head>
 <style>
+    .uploading {
+        position: fixed;
+        z-index: 9;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        padding-top: 30vh;
+        background: transparent;
+    }
+
+    .uploading div {
+        box-sizing: border-box;
+    }
+
+    .uploading .box {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        background-color: #ccc;
+        border-radius: 50%;
+    }
+
+    .uploading .num {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background: #fff;
+        border-radius: 50%;
+        width: 86px;
+        height: 86px;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        line-height: 86px;
+        font-size: 16px;
+    }
+
+    .uploading .clip {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        border: 7px solid #ccc;
+        border-radius: 50%;
+        clip: rect(0, 100px, 100px, 50px);
+    }
+
+    .uploading .left {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        border: 7px solid lightblue;
+        border-radius: 50%;
+        clip: rect(0 50px 100px 0);
+        top: -7px;
+        left: -7px;
+    }
+
+    .uploading .right {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        border: 7px solid lightblue;
+        border-radius: 50%;
+        clip: rect(0 100px 100px 50px);
+        top: -7px;
+        left: -7px;
+    }
+
+    .uploading .width-none {
+        width: 0;
+    }
+
+    .uploading .auto {
+        clip: auto;
+    }
+</style>
+<style>
     main {
         max-width: 900px;
         height: 70vh;
@@ -70,6 +149,15 @@
 </style>
 
 <body>
+    <div class="uploading" hidden="true">
+        <div class="box">
+            <div class="clip">
+                <div class="left"></div>
+                <div class="right width-none"></div>
+            </div>
+            <div class="num">0%</div>
+        </div>
+    </div>
     <main>
         <form id="form">
             <input type="file" accept="image/*" name="image" onchange="upload(event)">
@@ -88,12 +176,17 @@
     <script>
         function upload(event) {
             if (event.target.value) {
+                var uploadingElement = document.querySelector('.uploading');
+                uploadingElement.hidden = false;
                 axios({
                     method: 'post',
                     url: '/image',
                     data: new FormData(document.getElementById("form")),
                     headers: {
                         'Content-Type': 'multipart/form-data'
+                    },
+                    onUploadProgress: function (e) {
+                        setProgress(e.loaded / e.total);
                     }
                 }).then(function (response) {
                     var message = response.data;
@@ -110,12 +203,38 @@
                     }
                 }).catch(function (error) {
                     console.log(error);
-                    alert("服务器出了点问题!");
+                    setProgress(0);
+                    uploadingElement.hidden = true;
+                    setTimeout(function () {
+                        alert("服务器出了点问题!")
+                    });
                 }).then(function () {
                     var file = document.getElementsByTagName("input")[0];
                     file.outerHTML = file.outerHTML;
+                    setProgress(0);
+                    uploadingElement.hidden = true;
                 });
             }
+        }
+        function setProgress(val) {
+            var clip = document.querySelector('.clip'),
+                left = document.querySelector('.left'),
+                right = document.querySelector('.right'),
+                num = document.querySelector('.num'),
+                rotate = parseInt(val * 100);
+            while (rotate > 100) {
+                rotate -= 100;
+            }
+            if (rotate <= 50) {
+                right.classList.add('width-none');
+                clip.classList.remove('auto');
+            }
+            else if (rotate > 50) {
+                right.classList.remove('width-none');
+                clip.classList.add('auto');
+            }
+            left.style.transform = 'rotate(' + 3.6 * rotate + 'deg)';
+            num.innerHTML = `${rotate}%`
         }
     </script>
 </body>
