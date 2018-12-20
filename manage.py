@@ -91,12 +91,9 @@ if __name__ == '__main__':
                     app.run(host=args.host, port=args.port)
                 else:
                     unix_socket_path = os.path.join(BASE_DIR, 'sanic.sock')
-                    unix_socket = None
 
-                    @app.listener('before_server_start')
-                    def bind_unix(app, loop):
-                        unix_socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-                        unix_socket.bind(unix_socket_path)
+                    unix_socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+                    unix_socket.bind(unix_socket_path)
 
                     @app.listener('after_server_stop')
                     def clear_unix(app, loop):
