@@ -21,7 +21,7 @@ Media_DIR = os.path.join(os.path.dirname(BASE_DIR), "image")
 
 # If the path `Media_DIR` does not exist,
 # the command `git clone {Media_Rep}` is automatically executed before Sanic starts.
-# It will clone your Git repository in the same directory as this project.
+# It will clone your Git repository in `Media_DIR`
 Media_Rep = "https://github.com/AberSheeran/image.git"
 
 # This is the URL you can access to your git page

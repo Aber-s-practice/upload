@@ -21,7 +21,7 @@ Media_DIR = os.path.join(os.path.dirname(BASE_DIR), "image")
 
 # 如果 Media_DIR 路径不存在，
 # 在Sanic启动时，会自动执行`git clone {Media_Rep}`
-# 这会把你指定的Git仓库下载到与你项目同级的目录下
+# 这会把你指定的Git仓库下载到你所指定的Media_DIR
 Media_Rep = "https://github.com/AberSheeran/image.git"
 
 # 这是能访问到你的仓库内容的根url
