@@ -1,5 +1,3 @@
-# upload
-
 ## 中文说明 | [English](https://github.com/AberSheeran/upload/blob/master/README-En.md)
 
 这是一个使用Sanic构建的图床Web程序。
