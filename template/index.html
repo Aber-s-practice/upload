@@ -12,29 +12,26 @@
     <script src="https://unpkg.com/clipboard@2.0.0/dist/clipboard.min.js"></script>
 </head>
 <style>
-    .uploading {
+    #background {
         position: fixed;
-        z-index: 9;
         top: 0;
-        bottom: 0;
         left: 0;
         right: 0;
-        display: flex;
-        justify-content: center;
-        padding-top: 30vh;
+        bottom: 0;
+        z-index: 99;
         background: transparent;
     }
 
-    .uploading div {
-        box-sizing: border-box;
-    }
-
-    .uploading .box {
+    .uploading {
         width: 100px;
         height: 100px;
         position: relative;
         background-color: #ccc;
         border-radius: 50%;
+    }
+
+    .uploading div {
+        box-sizing: border-box;
     }
 
     .uploading .num {
@@ -142,8 +139,8 @@
         justify-content: flex-start;
     }
     #result {
-        border: none; 
-        outline: none; 
+        border: none;
+        outline: none;
         flex-grow: 1;
         height: 100%;
         margin: 0;
@@ -162,15 +159,7 @@
 </style>
 
 <body>
-    <div class="uploading" hidden="true">
-        <div class="box">
-            <div class="clip">
-                <div class="left"></div>
-                <div class="right width-none"></div>
-            </div>
-            <div class="num">0%</div>
-        </div>
-    </div>
+    <div id="background" hidden="true"></div>
     <header>
         <div class="pure-menu pure-menu-horizontal">
             <a href="#" class="pure-menu-heading pure-menu-link">首页</a>
@@ -199,6 +188,13 @@
             <div id="help">
                 上传图片
             </div>
+            <div class="uploading" hidden="true">
+                <div class="clip">
+                    <div class="left"></div>
+                    <div class="right width-none"></div>
+                </div>
+                <div class="num">0%</div>
+            </div>
         </form>
         <div class="pure-form">
             <input class="" id="result" type="text" readonly>
@@ -210,6 +206,7 @@
             if (event.target.value) {
                 var uploadingElement = document.querySelector('.uploading');
                 uploadingElement.hidden = false;
+                document.getElementById("background").hidden = false;
                 document.getElementById("help").hidden = true;
                 axios({
                     method: 'post',
@@ -238,6 +235,7 @@
                     console.log(error);
                     setProgress(0);
                     uploadingElement.hidden = true;
+                    document.getElementById("background").hidden = true;
                     setTimeout(function () {
                         alert("服务器出了点问题!")
                     });
@@ -246,6 +244,7 @@
                     file.outerHTML = file.outerHTML;
                     setProgress(0);
                     uploadingElement.hidden = true;
+                    document.getElementById("background").hidden = true;
                     document.getElementById("help").hidden = false;
                 });
             }
