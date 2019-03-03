@@ -88,22 +88,28 @@
     }
 </style>
 <style>
-    header, #main, #about {
+    header,
+    #main,
+    #about {
         max-width: 900px;
         margin: 0 auto;
     }
+
     header {
         padding: 10px 30px;
     }
+
     #main {
         height: 70vh;
         padding: 10px;
         box-sizing: border-box;
     }
+
     #about {
         padding: 30px;
         line-height: 2;
     }
+
     form {
         position: relative;
         display: block;
@@ -118,6 +124,7 @@
         /* background: radial-gradient(circle, rgb(217, 239, 246), lightblue); */
         background: #f0c9cf;
     }
+
     input[type="file"] {
         position: absolute;
         display: block;
@@ -129,15 +136,18 @@
         cursor: pointer;
         opacity: 0;
     }
+
     #help {
         font-size: calc(14px + 0.1vw);
         padding: 30px;
         border: 2px #000 dashed;
     }
+
     #main .pure-form {
         display: flex;
         justify-content: flex-start;
     }
+
     #result {
         border: none;
         outline: none;
@@ -146,11 +156,13 @@
         margin: 0;
         border-radius: 0;
     }
+
     #copy {
         float: right;
         border-radius: 0;
         background: #f1939c;
     }
+
     footer {
         text-align: center;
         padding: 20px;
@@ -170,17 +182,26 @@
                 <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
                     <a href="#" class="pure-menu-link">联系我</a>
                     <ul class="pure-menu-children">
-                        <li class="pure-menu-item"><a href="mailto:AberSheeran@qq.com" class="pure-menu-link">Email</a></li>
-                        <li class="pure-menu-item"><a href="https://twitter.com/Mr_Time__" class="pure-menu-link">Twitter</a></li>
-                        <li class="pure-menu-item"><a href="https://github.com/AberSheeran" class="pure-menu-link">Github</a></li>
+                        <li class="pure-menu-item"><a href="mailto:AberSheeran@qq.com" class="pure-menu-link">Email</a>
+                        </li>
+                        <li class="pure-menu-item"><a href="https://twitter.com/Mr_Time__"
+                                class="pure-menu-link">Twitter</a></li>
+                        <li class="pure-menu-item"><a href="https://github.com/AberSheeran"
+                                class="pure-menu-link">Github</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </header>
     <div id="about" class="route" hidden>
-        本站使用完全免费，承诺只要 abersheeran.com 这个一级域名还在我手上，图床就不会失效。<br>
-        上传图片成功之后获取的链接，需要经过很短的一段反应时间后才能访问。<br>
+        使用完全免费，承诺只要 abersheeran.com 这个一级域名还在我手上，图床就不会失效。<br>
+        <h2>初衷</h2>
+        <strong>创建的目的只是为了逛一些无法直接上传图片的论坛、网站时，方便使用图片。</strong><br>
+        不介意被当作图床使用，但也不建议当作图床使用，因为不想加入更多的功能。<br>
+        你一旦忘记了图片链接，可能你的图片就找不回来了。<br>
+        <h2>使用说明</h2>
+        上传图片成功之后获取的链接，需要经过一段反应时间后才能访问，所以不用着急。<br>
+        不要上传违反中华人民共和国法律法规的图片，此类图片上传也无法访问。<br>
     </div>
     <div id="main" class="route" hidden>
         <form id="form">

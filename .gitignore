@@ -1,5 +1,6 @@
 .idea/
 .vscode/
+.venv/
 *.py[cod]
 
 *.sock
