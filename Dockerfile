@@ -1,5 +1,8 @@
 # Use an official Python runtime as a parent image
+# python3.6 & python3.6-dev & ubuntu:18.04
 FROM abersheeran/python3
+
+RUN apt-get install -y git
 
 # Set the working directory to /app
 WORKDIR /app
@@ -8,7 +11,6 @@ WORKDIR /app
 COPY requirements.txt ./
 
 # Install any needed packages specified in requirements.txt
-RUN apt-get install -y git
 RUN pip3 install -r requirements.txt
 
 # Copy the current directory contents into the container at /app
