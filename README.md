@@ -17,8 +17,6 @@
 
 ```python
 # 这必须是你用以存储图片的git仓库的路径
-# 如果你没办法确定绝对路径是在哪，你可以像下面这样使用`os.path`来设置为项目同路径下的image文件夹里
-# 当然，你需要修改image为你自己的git仓库名称
 MEDIA_DIR = os.path.join(os.path.dirname(BASE_DIR), "image")
 
 # 这是能访问到你的仓库内容的根url
