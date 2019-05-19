@@ -13,7 +13,7 @@
 2. `cd upload`
 3. `pipenv sync`
 
-接下来，你需要修改`main/config`里面的三个配置
+接下来，你需要修改`main/config`里面的两个配置
 
 ```python
 # 这必须是你用以存储图片的git仓库的路径
