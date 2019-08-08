@@ -28,11 +28,25 @@ MEDIA_URL = "https://image.abersheeran.com/"
 
 ### Docker
 
-如果你拥有docker，那么事情就很简单了。修改`Dockerfile`中的`MEDIA_URL`为自己的url，然后执行如下命令
+如果你拥有docker，那么事情就很简单了。在项目根目录创建`docker-compose.yml`
 
-```bash
-docker build -t upload .
-docker run -v  ~/Documents/Github/image:/app/image -p 5000:80 -d upload
+```yml
+version: '3.3'
+services:
+  web:
+    build:
+      context: .
+      args:
+        name: upload
+    environment:
+      MEDIA_URL: "https://image.abersheeran.com"
+    volumes:
+      - /website/image:/app/image
+    ports:
+      - "5000:80"
+    restart: always
 ```
 
-注意要把`~/Documents/Github/image`换成你自己的image仓库路径。
+注意要把`/website/image`换成你自己的image仓库路径，`MEDIA_URL`换成自己的URL。
+
+使用`docker-compose up -d`即可在5000端口启动服务。
