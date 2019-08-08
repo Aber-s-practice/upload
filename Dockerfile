@@ -1,6 +1,13 @@
-# Use an official Python runtime as a parent image
-# python3.6 & python3.6-dev & ubuntu:18.04
-FROM abersheeran/python3
+FROM ubuntu:18.04
+
+RUN apt-get update \
+    && apt-get install -y python3.6 \
+    && apt-get install -y python3-pip
+
+ENV LC_ALL C.UTF-8
+ENV LANG C.UTF-8
+# Python, don't write bytecode!
+ENV PYTHONDONTWRITEBYTECODE 1
 
 RUN apt-get install -y git
 
