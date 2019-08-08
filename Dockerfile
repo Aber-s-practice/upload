@@ -20,8 +20,7 @@ COPY . /app
 EXPOSE 80
 
 # Define environment variable
-ENV MEDIA_URL="https://image.abersheeran.com/" \
-    MEDIA_DIR="/app/image"
+ENV MEDIA_DIR="/app/image"
 
 # Run app.py when the container launches
 CMD ["python3", "manage.py", "--host=0.0.0.0", "--port=80", "start"]
