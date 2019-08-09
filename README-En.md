@@ -1,7 +1,7 @@
 ## [中文说明](https://github.com/AberSheeran/upload/blob/master/README.md) | English
 
 This is the Image host Web site program built using Sanic.
-It stores the picture to the specified git repository (like [AberSheeran/image](https://github.com/AberSheeran/image))
+It stores the picture to the specified git repository.
 
 ## How to use
 
