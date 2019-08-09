@@ -34,10 +34,7 @@ MEDIA_URL = "https://image.abersheeran.com/"
 version: '3.3'
 services:
   web:
-    build:
-      context: .
-      args:
-        name: upload
+    image: abersheeran/upload
     environment:
       MEDIA_URL: "https://image.abersheeran.com"
     volumes:
