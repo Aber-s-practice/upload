@@ -1,5 +1,7 @@
 ## 中文说明 | [English](https://github.com/AberSheeran/upload/blob/master/README-En.md)
 
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/abersheeran/upload?style=flat-square)
+
 这是一个使用Sanic构建的图床Web程序。
 它会将图片存储在你指定的Git仓库，并且从服务器删除它（以此减轻服务器压力）。
 
