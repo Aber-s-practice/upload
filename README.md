@@ -38,7 +38,7 @@ services:
   web:
     image: abersheeran/upload
     environment:
-      MEDIA_URL: "https://image.abersheeran.com"
+      MEDIA_URL: "https://image.abersheeran.com/"
     volumes:
       - /website/image:/app/image
     ports:
