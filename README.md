@@ -22,7 +22,7 @@
 MEDIA_DIR = os.path.join(os.path.dirname(BASE_DIR), "image")
 
 # 这是能访问到你的仓库内容的根url
-# 例如 `https://image.abersheeran.com`
+# 例如 `https://raw.githubusercontent.com/USERNAME/REPOSITORY/master/`
 MEDIA_URL = "https://image.abersheeran.com/"
 ```
 
